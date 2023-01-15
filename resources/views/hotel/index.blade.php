@@ -32,11 +32,13 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-                        <a href="" class="btn btn-sm bg-primary text-white mb-4">Tambah Data Hotel</a>
+                        <a href="{{ route('add-hotel') }}" class="btn btn-sm bg-primary text-white mb-4">Tambah Data
+                            Hotel</a>
                         <table class="table table-borderless datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
+                                    <th scope="col">Kota</th>
                                     <th scope="col">Nama Hotel</th>
                                     <th scope="col">Gambar</th>
                                     <th scope="col">Harga</th>
@@ -46,20 +48,27 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($data as $hotel)
                                 <tr>
-                                    <th scope="row"><a href="#">#1</a></th>
-                                    <td>Agya Duta</td>
+                                    <td scope="row">{{ $loop->index + 1 }}</td>
+                                    <td>{{ $hotel->kota_id }}</td>
+                                    <td>{{ $hotel->nama_hotel }}</td>
                                     <td>
-                                        <img class="rounded" src="{{ asset('backend_template/assets/img/news-4.jpg') }}"
-                                            width="60" height="60" alt="">
+                                        <img class="rounded" src="{{ asset('storage/' . $hotel->gambar) }}"
+                                            width="100"  height="100"  style="object-fit:cover;">
                                     </td>
-                                    <td>Rp 850.000</td>
-                                    <td>Jln Angkatan 45 - Palembang</td>
+                                    <td>{{ $hotel->harga }}</td>
+                                    <td>{{ $hotel->alamat }}</td>
                                     <td>
                                         <a href="" class="btn btn-sm bg-success text-white">Edit</a>
                                         <a href="" class="btn btn-sm bg-danger text-white ">Hapus</a>
                                     </td>
                                 </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="6" class="text-center p-5">Data Tidak Ditemukan</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

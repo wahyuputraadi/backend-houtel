@@ -31,8 +31,14 @@
                         </ul>
                     </div>
                     <div class="card-body">
+                        {{-- Menampilkan Pesan error jika ada --}}
+                        @if (Session::get('success'))
+                            <div class="alert alert-warning fade show" role="alert">
+                                <strong>{{ Session::get('success') }}</strong>
+                            </div>
+                        @endif
                         <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-                        <a href="" class="btn btn-sm bg-primary text-white mb-4">Tambah Data Kota</a>
+                        <a href="{{ route('add-kota') }}" class="btn btn-sm bg-primary text-white mb-4">Tambah Data Kota</a>
                         <table class="table table-borderless datatable">
                             <thead>
                                 <tr>
@@ -44,19 +50,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row"><a href="#">#1</a></th>
-                                    <td>Palembang</td>
-                                    <td>
-                                        <img class="rounded" src="{{ asset('backend_template/assets/img/news-4.jpg') }}"
-                                            width="60" height="60">
-                                    </td>
-                                    <td>Ya</td>
-                                    <td>
-                                        <a href="" class="btn btn-sm bg-success text-white">Edit</a>
-                                        <a href="" class="btn btn-sm bg-danger text-white ">Hapus</a>
-                                    </td>
-                                </tr>
+                                @forelse ($data as $kota)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $kota->nama_kota }}</td>
+                                        <td>
+                                            <img class="rounded" src="{{ asset('storage/' . $kota->cover) }}" width="100"
+                                                height="100" style="object-fit:cover;">
+                                        </td>
+                                        <td>{{ $kota->status_publish == '1' ? 'Publish' : 'Not Publish' }}</td>
+                                        <td>
+                                            {{-- <a href="{{ url('edit-user/' .$edit->id) }}" class="btn btn-sm bg-success text-white">Edit</a> --}}
+                                            <a href="{{ route('edit-kota', $kota->id) }}" class="btn btn-sm bg-success text-white">Edit</a>
+                                            <a href="{{ route('hapus-kota', $kota->id) }}" class="btn btn-sm bg-danger text-white"
+                                                onclick="return confirm('Yakin Hapus Data ?')">Hapus</a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center p-5">Data Tidak Ditemukan</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

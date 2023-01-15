@@ -29,8 +29,12 @@
                         </ul>
                     </div>
                     <div class="card-body">
-
-                       
+                        {{-- Menampilkan Pesan error jika ada --}}
+                        @if (Session::get('success'))
+                            <div class="alert alert-warning fade show" role="alert">
+                                <strong>{{ Session::get('success') }}</strong>
+                            </div>
+                        @endif
 
                         <h5 class="card-title">Recent Sales <span>| Today</span></h5>
                         <a href="{{ route('add-user') }}" class="btn btn-sm bg-primary text-white mb-4">Tambah Data User</a>
@@ -50,15 +54,17 @@
                                         <th scope="row"><a href="#"></a>{{ $no + 1 }}</th>
 
                                         <td>{{ $hasil->name }}</td>
-                                        <td><a href="#" class="text-primary">{{ $hasil->email }}</a></td>
+                                        <td><a href=""" class="text-primary">{{ $hasil->email }}</a></td>
                                         <td>
                                             {{ $hasil->role == 'Adm' ? 'Admin' : 'Kasir' }}
                                         </td>
                                         <td>
-                                            {{-- <a href="{{ url('edit-user/' .$edit->id) }}" class="btn btn-sm bg-success text-white">Edit</a> --}} 
+                                            {{-- <a href="{{ url('edit-user/' .$edit->id) }}" class="btn btn-sm bg-success text-white">Edit</a> --}}
                                             <a href="{{ route('edit-user', $hasil->id) }}"
                                                 class="btn btn-sm bg-success text-white">Edit</a>
-                                            <a href="{{ route('delete-user', $hasil->id) }}" class="btn btn-sm bg-danger text-white" onclick="return confirm('Yakin Hapus Data ?')">Hapus</a>
+                                            <a href="{{ route('delete-user', $hasil->id) }}"
+                                                class="btn btn-sm bg-danger text-white"
+                                                onclick="return confirm('Yakin Hapus Data ?')">Hapus</a>
                                         </td>
                                     </tr>
                                 @empty

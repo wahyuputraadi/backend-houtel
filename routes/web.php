@@ -5,6 +5,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\KotaController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\UserController;
+use App\Models\Kota;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,9 +36,19 @@ route::get('/delete-user/{id}', [UserController::class, 'Delete'])->name(('delet
 
 // kota
 route::get('/kota', [KotaController::class, 'index'])->name(('kota')) ;
+route::get('/add-kota', [KotaController::class, 'add'])->name(('add-kota')) ;
+route::get('/edit-kota/{id}', [KotaController::class, 'edit'])->name(('edit-kota')) ;
+route::post('/insert-kota', [KotaController::class, 'insert'])->name(('insert-kota')) ;
+route::post('/update-kota', [KotaController::class, 'update'])->name(('update-kota')) ;
+route::get('/hapus-kota/{id}', [KotaController::class, 'delete'])->name(('hapus-kota')) ;
+
 
 // hotel
 route::get('/hotel', [HotelController::class, 'index'])->name(('hotel')) ;
+route::get('/add-hotel', [HotelController::class, 'add'])->name(('add-hotel')) ;
+route::post('/insert-hotel', [HotelController::class, 'insert'])->name(('insert-hotel')) ;
+
+
 
 // pemesanan
 route::get('/pemesanan', [PemesananController::class, 'index'])->name(('pemesanan')) ;

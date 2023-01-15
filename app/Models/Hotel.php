@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
     use HasFactory;
+     // mengizinkan field dari database
+     protected $fillable = [
+        'kota_id',
+        'nama_hotel',
+        'gambar',
+        'harga',
+        'alamat',
+    ];
 }
