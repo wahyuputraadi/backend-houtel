@@ -57,7 +57,7 @@
                                         <img class="rounded" src="{{ asset('storage/' . $hotel->gambar) }}"
                                             width="100"  height="100"  style="object-fit:cover;">
                                     </td>
-                                    <td>{{ $hotel->harga }}</td>
+                                    <td>Rp {{ $hotel->harga }}</td>
                                     <td>{{ $hotel->alamat }}</td>
                                     <td>
                                         <a href="" class="btn btn-sm bg-success text-white">Edit</a>
